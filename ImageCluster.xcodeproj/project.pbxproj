@@ -1,0 +1,380 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9D8D5D3D1F66899700F46A1B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D5D3C1F66899700F46A1B /* main.cpp */; };
+		9D9945FB1F66914900F32F13 /* FaceBlendCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D9945FA1F66914900F32F13 /* FaceBlendCommon.cpp */; };
+		9D9946011F66925700F32F13 /* ImageCluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D9945FF1F66925700F32F13 /* ImageCluster.cpp */; };
+		9DF873C71F66D75200288B77 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF873C61F66D75200288B77 /* Accelerate.framework */; };
+		9DF873C91F66D7ED00288B77 /* libdlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9945F71F66910800F32F13 /* libdlib.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9D8D5D371F66899700F46A1B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9D8D5D391F66899700F46A1B /* ImageCluster */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ImageCluster; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D8D5D3C1F66899700F46A1B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9D9945F71F66910800F32F13 /* libdlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdlib.a; sourceTree = "<group>"; };
+		9D9945F91F66914900F32F13 /* FaceBlendCommon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FaceBlendCommon.hpp; sourceTree = "<group>"; };
+		9D9945FA1F66914900F32F13 /* FaceBlendCommon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FaceBlendCommon.cpp; sourceTree = "<group>"; };
+		9D9945FC1F66916600F32F13 /* OpenCVHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenCVHeader.hpp; sourceTree = "<group>"; };
+		9D9945FE1F66922200F32F13 /* dlib_face_recognition_resnet_model_v1.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = dlib_face_recognition_resnet_model_v1.dat; sourceTree = "<group>"; };
+		9D9945FF1F66925700F32F13 /* ImageCluster.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImageCluster.cpp; sourceTree = "<group>"; };
+		9D9946001F66925700F32F13 /* ImageCluster.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImageCluster.hpp; sourceTree = "<group>"; };
+		9DF873C41F66C18400288B77 /* MainHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MainHeader.hpp; sourceTree = "<group>"; };
+		9DF873C61F66D75200288B77 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9D8D5D361F66899700F46A1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DF873C91F66D7ED00288B77 /* libdlib.a in Frameworks */,
+				9DF873C71F66D75200288B77 /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9D8D5D301F66899700F46A1B = {
+			isa = PBXGroup;
+			children = (
+				9D8D5D3B1F66899700F46A1B /* ImageCluster */,
+				9D8D5D3A1F66899700F46A1B /* Products */,
+				9DF873C51F66D75200288B77 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9D8D5D3A1F66899700F46A1B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D8D5D391F66899700F46A1B /* ImageCluster */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9D8D5D3B1F66899700F46A1B /* ImageCluster */ = {
+			isa = PBXGroup;
+			children = (
+				9D9945FD1F6691CE00F32F13 /* model */,
+				9D9945F81F66911D00F32F13 /* resource */,
+				9D9945F61F66910800F32F13 /* lib */,
+				9D8D5D3C1F66899700F46A1B /* main.cpp */,
+				9D9946001F66925700F32F13 /* ImageCluster.hpp */,
+				9D9945FF1F66925700F32F13 /* ImageCluster.cpp */,
+				9D9945F91F66914900F32F13 /* FaceBlendCommon.hpp */,
+				9D9945FA1F66914900F32F13 /* FaceBlendCommon.cpp */,
+				9D9945FC1F66916600F32F13 /* OpenCVHeader.hpp */,
+				9DF873C41F66C18400288B77 /* MainHeader.hpp */,
+			);
+			path = ImageCluster;
+			sourceTree = "<group>";
+		};
+		9D9945F61F66910800F32F13 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				9D9945F71F66910800F32F13 /* libdlib.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		9D9945F81F66911D00F32F13 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
+		9D9945FD1F6691CE00F32F13 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				9D9945FE1F66922200F32F13 /* dlib_face_recognition_resnet_model_v1.dat */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		9DF873C51F66D75200288B77 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9DF873C61F66D75200288B77 /* Accelerate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9D8D5D381F66899700F46A1B /* ImageCluster */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D8D5D401F66899700F46A1B /* Build configuration list for PBXNativeTarget "ImageCluster" */;
+			buildPhases = (
+				9D8D5D351F66899700F46A1B /* Sources */,
+				9D8D5D361F66899700F46A1B /* Frameworks */,
+				9D8D5D371F66899700F46A1B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageCluster;
+			productName = ImageCluster;
+			productReference = 9D8D5D391F66899700F46A1B /* ImageCluster */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9D8D5D311F66899700F46A1B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = durgesh;
+				TargetAttributes = {
+					9D8D5D381F66899700F46A1B = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 265UFUW5H2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9D8D5D341F66899700F46A1B /* Build configuration list for PBXProject "ImageCluster" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9D8D5D301F66899700F46A1B;
+			productRefGroup = 9D8D5D3A1F66899700F46A1B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9D8D5D381F66899700F46A1B /* ImageCluster */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9D8D5D351F66899700F46A1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D9946011F66925700F32F13 /* ImageCluster.cpp in Sources */,
+				9D8D5D3D1F66899700F46A1B /* main.cpp in Sources */,
+				9D9945FB1F66914900F32F13 /* FaceBlendCommon.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9D8D5D3E1F66899700F46A1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9D8D5D3F1F66899700F46A1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9D8D5D411F66899700F46A1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 265UFUW5H2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					DDLIB_PNG_SUPPORT,
+					DDLIB_JPEG_SUPPORT,
+					DLIB_NO_GUI_SUPPORT,
+				);
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Cellar/opencv3/3.2.0/**",
+					"/Users/durgeshtrivedi/durgesh/OpenCV/dlib-19.4",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Cellar/opencv3/3.2.0/**",
+					"$(PROJECT_DIR)/ImageCluster/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_text",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9D8D5D421F66899700F46A1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 265UFUW5H2;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					NDEBUG,
+					DDLIB_USE_LAPACK,
+					DDLIB_USE_BLAS,
+				);
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Cellar/opencv3/3.2.0/**",
+					"/Users/durgeshtrivedi/durgesh/OpenCV/dlib-19.4",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Cellar/opencv3/3.2.0/**",
+					"$(PROJECT_DIR)/ImageCluster/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_text",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9D8D5D341F66899700F46A1B /* Build configuration list for PBXProject "ImageCluster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D8D5D3E1F66899700F46A1B /* Debug */,
+				9D8D5D3F1F66899700F46A1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9D8D5D401F66899700F46A1B /* Build configuration list for PBXNativeTarget "ImageCluster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D8D5D411F66899700F46A1B /* Debug */,
+				9D8D5D421F66899700F46A1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9D8D5D311F66899700F46A1B /* Project object */;
+}
