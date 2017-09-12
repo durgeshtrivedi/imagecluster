@@ -35,7 +35,7 @@ $(PROJECT_DIR)/ImageCluster/lib
 
  You need to add the libdlib.a  and Accelerate.framwork in link binary
  
- YOu again no need to do any thing over here 
+ You again no need to do any thing over here 
  
  ### OpenCv Other linker flags ##
  
@@ -47,12 +47,25 @@ $(PROJECT_DIR)/ImageCluster/lib
  
  ### dlib preprocess macros 
  
- To build the  project properly you need to add some preprocess macro for dlib else it will not build 
+To build the  project properly you need to add some preprocess macro for dlib else it will not build 
 
 These 2 links will help to understand it. again you no need to do it now it is part of project .
+Debug 
+
+NDEBUG
+DDLIB_PNG_SUPPORT
+DDLIB_JPEG_SUPPORT
+DLIB_NO_GUI_SUPPORT
+
+Release
+NDEBUG
+DDLIB_USE_LAPACK
+DDLIB_USE_BLAS
 
 https://github.com/zweigraf/face-landmarking-ios/issues/7 
 
-### notes ## 
+https://github.com/RedHandTech/Object_Detector  
+
+### Notes ## 
 So to make this project build properly you only need to properly give path for headers for opencv and dlib .
-rest of the setting are already part of the project and they should work all the info in just for understanding if any things not work. 
+Rest of the setting are already part of the project and they should work all the info in just for understanding if any things not work. 
