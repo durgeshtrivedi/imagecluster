@@ -1,9 +1,11 @@
 # README #
 
-The project is having default setting considering OpencCV and Dlib is installed on the system with specific path else 
+Theis project can only be run using Xcode on MAC.It is having default setting considering OpencCV and Dlib is installed on the system with specific path else 
 you need to edit the Opencv and dlib Header/ library path in build setting for the project. Which you definately need it to run the project .
 
-### OpenCv and Dlib header search path in project setting ###
+### OpenCV  and Dlib header search path in project setting ###
+The OpenCv 3.2.0 and dlib-19.4 version I have used for this project, higher version should also work for both
+
 The header search path for dlib and opencv should be like this 
 
 First you need to install the Opencv on your sytem for that. Also you need build dlib file .
@@ -69,3 +71,6 @@ https://github.com/RedHandTech/Object_Detector
 ### Notes ## 
 So to make this project build properly you only need to properly give path for headers for opencv and dlib .
 Rest of the setting are already part of the project and they should work all the info in just for understanding if any things not work. 
+
+I have added the ziped dlib-19.4 file in extra folder in project dir you can unzip and use the path in headers for dlib.Thats should work I have not tried this way 
+because I build dlib from source, so I think this way will work. But you must install OpenCV to run the project .
