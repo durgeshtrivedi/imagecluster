@@ -10,14 +10,49 @@
 #define MainHeader_h
 
 
-#include <stdio.h>
+
+//#include <opencv2/core/core.hpp>
+//#include <opencv2/highgui/highgui.hpp>
+//#include <opencv2/imgproc/imgproc.hpp>
+// image classfier
+//#include "opencv2/objdetect.hpp"
+
+//#include <opencv2/core.hpp>
+//#include <opencv2/face.hpp>
+//#include <opencv2/videoio.hpp>
+//#include <opencv2/highgui.hpp>
+//#include <opencv2/imgproc.hpp>
+//#include <opencv2/objdetect.hpp>
+
+
+#include "opencv2/opencv.hpp"
 #include <iostream>
 #include <fstream>
-#include <istream>
+#include <math.h>
+#include <cmath>
+#include <map>
+#include <stdlib.h>
+#include <algorithm>
 #include <vector>
-#include "OpenCVHeader.hpp"
 
+// Dlib dnn
 
+#include <dlib/dnn.h>
+#include <dlib/image_io.h>
+#include <dlib/opencv.h>
+#include <dlib/image_processing.h>
+#include <dlib/image_processing/frontal_face_detector.h>
+
+#define faceWidth 64
+#define faceHeight 64
+#define PI 3.14159265
+
+#define THRESHOLD 0.5
+
+#define  pathlandmarkdetector "/models/shape_predictor_68_face_landmarks.dat";
+#define  pathRESNETModel "/models/dlib_face_recognition_resnet_model_v1.dat";
+
+using namespace cv;
 using namespace std;
 
 #endif /* MainHeader_h */

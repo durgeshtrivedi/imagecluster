@@ -14,10 +14,7 @@
 
 string pathFace = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/faces";
 string pathFaceRec = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/FaceRec/trainFaces";
-string pathTestFaceRec = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/FaceRec/testFaces/";
-string pathEigenFaceRec = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/face_model_eigen.yml";
-string pathFisherFaceRec = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/face_model_fisher.yml";
-string pathLBHPFaceRec = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/face_model_lbhp.yml";
+
 string pathDescriptorsCSV= "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/descriptors.csv";
 
 string pathVaibhav = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/faces/vaibhaw_query.jpg";

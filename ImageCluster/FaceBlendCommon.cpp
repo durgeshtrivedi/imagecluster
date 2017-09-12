@@ -8,9 +8,6 @@
 
 #include "FaceBlendCommon.hpp"
 
-string pathdlibEmotionClassifier = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/dlibEmotionDataset/result/dlibEmotionClassifier.yml";
-
-
 Mat getCroppedFaceRegion(Mat image, std::vector<Point2f> landmarks, cv::Rect &selectedRegion)
 {
     int x1Limit = landmarks[0].x - (landmarks[36].x - landmarks[0].x);

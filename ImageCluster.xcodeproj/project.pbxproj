@@ -32,7 +32,6 @@
 		9D9945F71F66910800F32F13 /* libdlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdlib.a; sourceTree = "<group>"; };
 		9D9945F91F66914900F32F13 /* FaceBlendCommon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FaceBlendCommon.hpp; sourceTree = "<group>"; };
 		9D9945FA1F66914900F32F13 /* FaceBlendCommon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FaceBlendCommon.cpp; sourceTree = "<group>"; };
-		9D9945FC1F66916600F32F13 /* OpenCVHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenCVHeader.hpp; sourceTree = "<group>"; };
 		9D9945FE1F66922200F32F13 /* dlib_face_recognition_resnet_model_v1.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = dlib_face_recognition_resnet_model_v1.dat; sourceTree = "<group>"; };
 		9D9945FF1F66925700F32F13 /* ImageCluster.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImageCluster.cpp; sourceTree = "<group>"; };
 		9D9946001F66925700F32F13 /* ImageCluster.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImageCluster.hpp; sourceTree = "<group>"; };
@@ -81,7 +80,6 @@
 				9D9945FF1F66925700F32F13 /* ImageCluster.cpp */,
 				9D9945F91F66914900F32F13 /* FaceBlendCommon.hpp */,
 				9D9945FA1F66914900F32F13 /* FaceBlendCommon.cpp */,
-				9D9945FC1F66916600F32F13 /* OpenCVHeader.hpp */,
 				9DF873C41F66C18400288B77 /* MainHeader.hpp */,
 			);
 			path = ImageCluster;

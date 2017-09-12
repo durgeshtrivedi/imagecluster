@@ -24,7 +24,7 @@
   #define M_PI 3.14159
 #endif
 
-using namespace cv::ml;
+
 using namespace dlib;
 
 Mat getCroppedFaceRegion(Mat image, std::vector<Point2f> landmarks, cv::Rect &selectedRegion);
