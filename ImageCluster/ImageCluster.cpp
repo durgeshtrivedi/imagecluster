@@ -9,7 +9,23 @@
 #include "ImageCluster.hpp"
 
 void imageCluster () {
-    enRollDlibFaceRec();
+    int index;
+    cout << "You want to train enter 1 want to test the train data enter 2 : ";
+    cin >> index;
+    switch (index) {
+    case 1 :
+            cout << "Reading all the images to enroll will take some time Keep patience ... <<" << endl;
+            enRollDlibFaceRec();
+            break;
+        case 2 :
+            cout << "Showing will take some time based on how large the data ...  <<" << endl;
+                testDlibFaceRecImage();
+            break;
+        default :
+            cout << "Input the correct value" << endl;
+            imageCluster ();
+            break;
+    }
 }
 
 // ----------------------------------------------------------------------------------------
@@ -25,11 +41,13 @@ void printVector(std::vector<T>& vec) {
 
 
 void enRollDlibFaceRec() {
+    cout << "It will take some time to read the dlib model keep patience " << endl;
     // Initialize face detector, facial landmarks detector and face recognizer
+    string currectDir  = GetCurrentWorkingDirectory();
     String predictorPath, faceRecognitionModelPath;
-    predictorPath = pathlandmarkdetector;
+    predictorPath = currectDir + pathlandmarkdetector;
     
-    faceRecognitionModelPath = pathRESNETModel;
+    faceRecognitionModelPath =  currectDir + pathRESNETModel;
     frontal_face_detector faceDetector = get_frontal_face_detector();
     shape_predictor landmarkDetector;
     deserialize(predictorPath) >> landmarkDetector;
@@ -40,7 +58,7 @@ void enRollDlibFaceRec() {
     // data is organized assuming following structure
     // faces folder has subfolders.
     // each subfolder has images of a person
-    string faceDatasetFolder = pathFace;
+    string faceDatasetFolder = currectDir + pathFace;
     std::vector<string> subfolders, fileNames, symlinkNames;
     // fileNames and symlinkNames are useless here
     // as we are looking for sub-directories only
@@ -167,7 +185,7 @@ void enRollDlibFaceRec() {
     // each row of file descriptors.csv has:
     // 1st element as face label and
     // rest 128 as descriptor values
-    const string descriptorsPath = pathDescriptorsCSV;
+    const string descriptorsPath = currectDir + pathDescriptorsCSV;
     ofstream ofs;
     ofs.open(descriptorsPath);
     // write descriptors
@@ -197,8 +215,9 @@ void enRollDlibFaceRec() {
 void testDlibFaceRecImage() {
     // Initialize face detector, facial landmarks detector and face recognizer
     String predictorPath, faceRecognitionModelPath;
-    predictorPath = pathlandmarkdetector;
-    faceRecognitionModelPath = pathRESNETModel;
+     string currectDir  = GetCurrentWorkingDirectory();
+    predictorPath = currectDir + pathlandmarkdetector;
+    faceRecognitionModelPath = currectDir + pathRESNETModel;
     frontal_face_detector faceDetector = get_frontal_face_detector();
     shape_predictor landmarkDetector;
     deserialize(predictorPath) >> landmarkDetector;
@@ -213,7 +232,7 @@ void testDlibFaceRecImage() {
     readLabelNameMap(labelNameFile, names, labels, labelNameMap);
     
     // read descriptors of enrolled faces from file
-    const string faceDescriptorFile = pathDescriptorsCSV;
+    const string faceDescriptorFile = currectDir + pathDescriptorsCSV;
     std::vector<int> faceLabels;
     std::vector<matrix<float,0,1>> faceDescriptors;
     readDescriptors(faceDescriptorFile, faceLabels, faceDescriptors);
@@ -221,7 +240,7 @@ void testDlibFaceRecImage() {
     // read query image
     string imagePath;
     
-    imagePath = pathVaibhav;
+    imagePath = currectDir + pathVaibhav;
     
     Mat im = cv::imread(imagePath, cv::IMREAD_COLOR);
     

@@ -38,6 +38,14 @@
 		9DF873CC1F6956FC00288B77 /* dlib_face_recognition_resnet_model_v1.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = dlib_face_recognition_resnet_model_v1.dat; sourceTree = "<group>"; };
 		9DF873CD1F6956FC00288B77 /* shape_predictor_68_face_landmarks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = shape_predictor_68_face_landmarks.dat; sourceTree = "<group>"; };
 		9DF873D01F69574700288B77 /* libdlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdlib.a; sourceTree = "<group>"; };
+		9DF873DE1F6971F000288B77 /* koustubh_09.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = koustubh_09.jpg; sourceTree = "<group>"; };
+		9DF873DF1F6971F000288B77 /* koustubh_10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = koustubh_10.jpg; sourceTree = "<group>"; };
+		9DF873E01F6971F000288B77 /* vaibhaw_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vaibhaw_01.jpg; sourceTree = "<group>"; };
+		9DF873E11F6971F000288B77 /* vaibhaw_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vaibhaw_02.jpg; sourceTree = "<group>"; };
+		9DF873E21F6971F000288B77 /* vikas_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vikas_01.jpg; sourceTree = "<group>"; };
+		9DF873E31F6971F000288B77 /* vikas_03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vikas_03.jpg; sourceTree = "<group>"; };
+		9DF873E41F6971F000288B77 /* vikas_04.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vikas_04.jpg; sourceTree = "<group>"; };
+		9DF873E51F6971F000288B77 /* vikas_06.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vikas_06.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,14 +81,15 @@
 		9D8D5D3B1F66899700F46A1B /* ImageCluster */ = {
 			isa = PBXGroup;
 			children = (
+				9DF873D21F696D5300288B77 /* data */,
 				9DF873CE1F69573B00288B77 /* resources */,
 				9D9945FD1F6691CE00F32F13 /* model */,
 				9D9945F61F66910800F32F13 /* lib */,
 				9D8D5D3C1F66899700F46A1B /* main.cpp */,
-				9D9946001F66925700F32F13 /* ImageCluster.hpp */,
 				9D9945FF1F66925700F32F13 /* ImageCluster.cpp */,
-				9D9945F91F66914900F32F13 /* FaceBlendCommon.hpp */,
+				9D9946001F66925700F32F13 /* ImageCluster.hpp */,
 				9D9945FA1F66914900F32F13 /* FaceBlendCommon.cpp */,
+				9D9945F91F66914900F32F13 /* FaceBlendCommon.hpp */,
 				9DF873C41F66C18400288B77 /* MainHeader.hpp */,
 			);
 			path = ImageCluster;
@@ -122,6 +131,37 @@
 		9DF873CF1F69573B00288B77 /* images */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		9DF873D21F696D5300288B77 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				9DF873DC1F6971F000288B77 /* faces */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		9DF873DC1F6971F000288B77 /* faces */ = {
+			isa = PBXGroup;
+			children = (
+				9DF873DD1F6971F000288B77 /* images */,
+			);
+			path = faces;
+			sourceTree = "<group>";
+		};
+		9DF873DD1F6971F000288B77 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				9DF873DE1F6971F000288B77 /* koustubh_09.jpg */,
+				9DF873DF1F6971F000288B77 /* koustubh_10.jpg */,
+				9DF873E01F6971F000288B77 /* vaibhaw_01.jpg */,
+				9DF873E11F6971F000288B77 /* vaibhaw_02.jpg */,
+				9DF873E21F6971F000288B77 /* vikas_01.jpg */,
+				9DF873E31F6971F000288B77 /* vikas_03.jpg */,
+				9DF873E41F6971F000288B77 /* vikas_04.jpg */,
+				9DF873E51F6971F000288B77 /* vikas_06.jpg */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -223,10 +263,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -283,6 +320,7 @@
 		9D8D5D411F66899700F46A1B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/ImageCluster";
 				DEVELOPMENT_TEAM = 265UFUW5H2;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -324,6 +362,7 @@
 		9D8D5D421F66899700F46A1B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/ImageCluster";
 				DEVELOPMENT_TEAM = 265UFUW5H2;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
 					NDEBUG,

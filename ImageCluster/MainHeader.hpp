@@ -9,21 +9,19 @@
 #ifndef MainHeader_h
 #define MainHeader_h
 
-
-
-//#include <opencv2/core/core.hpp>
-//#include <opencv2/highgui/highgui.hpp>
-//#include <opencv2/imgproc/imgproc.hpp>
-// image classfier
-//#include "opencv2/objdetect.hpp"
-
-//#include <opencv2/core.hpp>
-//#include <opencv2/face.hpp>
-//#include <opencv2/videoio.hpp>
-//#include <opencv2/highgui.hpp>
-//#include <opencv2/imgproc.hpp>
-//#include <opencv2/objdetect.hpp>
-
+// This code is specific to read the Current Dir on differenct system without it on xcode not able to read CD
+#ifdef _WIN32
+#include "direct.h"
+#define PATH_SEP '\\'
+#define GETCWD _getcwd
+#define CHDIR _chdir
+#else
+#include "unistd.h"
+#define PATH_SEP '/'
+#define GETCWD getcwd
+#define CHDIR chdir
+#endif
+//
 
 #include "opencv2/opencv.hpp"
 #include <iostream>
@@ -49,10 +47,21 @@
 
 #define THRESHOLD 0.5
 
-#define  pathlandmarkdetector "./models/shape_predictor_68_face_landmarks.dat";
-#define  pathRESNETModel "./models/dlib_face_recognition_resnet_model_v1.dat";
+#define  pathlandmarkdetector "/model/shape_predictor_68_face_landmarks.dat";
+#define  pathRESNETModel   "/model/dlib_face_recognition_resnet_model_v1.dat";
+
 
 using namespace cv;
 using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
+
+// Code specific to read Current Dir
+string GetExecutableDirectory(const char* argv0);
+bool ChangeDirectory(const char* dir);
+string GetCurrentWorkingDirectory();
+//
+
 void imageCluster ();
 #endif /* MainHeader_h */

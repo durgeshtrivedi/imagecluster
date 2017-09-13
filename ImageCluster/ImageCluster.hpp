@@ -12,12 +12,9 @@
 #include "FaceBlendCommon.hpp"
 
 
-string pathFace = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/faces";
-string pathFaceRec = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/FaceRec/trainFaces";
-
-string pathDescriptorsCSV= "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/descriptors.csv";
-
-string pathVaibhav = "/Users/durgeshtrivedi/durgesh/OpenCV/LearnOpenCV/IOSWithOpencv/OpencvIOS/opencv/data/images/faces/vaibhaw_query.jpg";
+string pathFace =   "/data/faces";
+string pathDescriptorsCSV= "/data/descriptors.csv";
+string pathVaibhav = "/data/faces/vaibhaw_query.jpg";
 
 using namespace dlib;
 // ----------------------------------------------------------------------------------------
@@ -56,4 +53,5 @@ input_rgb_image_sized<150>
 
 void imageCluster ();
 void enRollDlibFaceRec();
+void testDlibFaceRecImage();
 #endif /* ImageCluster_hpp */
