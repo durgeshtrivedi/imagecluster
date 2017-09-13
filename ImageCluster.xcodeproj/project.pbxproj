@@ -11,7 +11,7 @@
 		9D9945FB1F66914900F32F13 /* FaceBlendCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D9945FA1F66914900F32F13 /* FaceBlendCommon.cpp */; };
 		9D9946011F66925700F32F13 /* ImageCluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D9945FF1F66925700F32F13 /* ImageCluster.cpp */; };
 		9DF873C71F66D75200288B77 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF873C61F66D75200288B77 /* Accelerate.framework */; };
-		9DF873C91F66D7ED00288B77 /* libdlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9945F71F66910800F32F13 /* libdlib.a */; };
+		9DF873D11F6957AC00288B77 /* libdlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF873D01F69574700288B77 /* libdlib.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,14 +29,15 @@
 /* Begin PBXFileReference section */
 		9D8D5D391F66899700F46A1B /* ImageCluster */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ImageCluster; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8D5D3C1F66899700F46A1B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		9D9945F71F66910800F32F13 /* libdlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdlib.a; sourceTree = "<group>"; };
 		9D9945F91F66914900F32F13 /* FaceBlendCommon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FaceBlendCommon.hpp; sourceTree = "<group>"; };
 		9D9945FA1F66914900F32F13 /* FaceBlendCommon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FaceBlendCommon.cpp; sourceTree = "<group>"; };
-		9D9945FE1F66922200F32F13 /* dlib_face_recognition_resnet_model_v1.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = dlib_face_recognition_resnet_model_v1.dat; sourceTree = "<group>"; };
 		9D9945FF1F66925700F32F13 /* ImageCluster.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImageCluster.cpp; sourceTree = "<group>"; };
 		9D9946001F66925700F32F13 /* ImageCluster.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImageCluster.hpp; sourceTree = "<group>"; };
 		9DF873C41F66C18400288B77 /* MainHeader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MainHeader.hpp; sourceTree = "<group>"; };
 		9DF873C61F66D75200288B77 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		9DF873CC1F6956FC00288B77 /* dlib_face_recognition_resnet_model_v1.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = dlib_face_recognition_resnet_model_v1.dat; sourceTree = "<group>"; };
+		9DF873CD1F6956FC00288B77 /* shape_predictor_68_face_landmarks.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = shape_predictor_68_face_landmarks.dat; sourceTree = "<group>"; };
+		9DF873D01F69574700288B77 /* libdlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdlib.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DF873C91F66D7ED00288B77 /* libdlib.a in Frameworks */,
+				9DF873D11F6957AC00288B77 /* libdlib.a in Frameworks */,
 				9DF873C71F66D75200288B77 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,8 +73,8 @@
 		9D8D5D3B1F66899700F46A1B /* ImageCluster */ = {
 			isa = PBXGroup;
 			children = (
+				9DF873CE1F69573B00288B77 /* resources */,
 				9D9945FD1F6691CE00F32F13 /* model */,
-				9D9945F81F66911D00F32F13 /* resource */,
 				9D9945F61F66910800F32F13 /* lib */,
 				9D8D5D3C1F66899700F46A1B /* main.cpp */,
 				9D9946001F66925700F32F13 /* ImageCluster.hpp */,
@@ -88,22 +89,16 @@
 		9D9945F61F66910800F32F13 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				9D9945F71F66910800F32F13 /* libdlib.a */,
+				9DF873D01F69574700288B77 /* libdlib.a */,
 			);
 			path = lib;
-			sourceTree = "<group>";
-		};
-		9D9945F81F66911D00F32F13 /* resource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = resource;
 			sourceTree = "<group>";
 		};
 		9D9945FD1F6691CE00F32F13 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				9D9945FE1F66922200F32F13 /* dlib_face_recognition_resnet_model_v1.dat */,
+				9DF873CC1F6956FC00288B77 /* dlib_face_recognition_resnet_model_v1.dat */,
+				9DF873CD1F6956FC00288B77 /* shape_predictor_68_face_landmarks.dat */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -114,6 +109,21 @@
 				9DF873C61F66D75200288B77 /* Accelerate.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9DF873CE1F69573B00288B77 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				9DF873CF1F69573B00288B77 /* images */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		9DF873CF1F69573B00288B77 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
