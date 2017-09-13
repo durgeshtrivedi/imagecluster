@@ -49,10 +49,10 @@
 
 #define THRESHOLD 0.5
 
-#define  pathlandmarkdetector "/models/shape_predictor_68_face_landmarks.dat";
-#define  pathRESNETModel "/models/dlib_face_recognition_resnet_model_v1.dat";
+#define  pathlandmarkdetector "./models/shape_predictor_68_face_landmarks.dat";
+#define  pathRESNETModel "./models/dlib_face_recognition_resnet_model_v1.dat";
 
 using namespace cv;
 using namespace std;
-
+void imageCluster ();
 #endif /* MainHeader_h */

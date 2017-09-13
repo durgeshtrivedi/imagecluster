@@ -9,7 +9,7 @@
 #include "ImageCluster.hpp"
 
 void imageCluster () {
-    
+    enRollDlibFaceRec();
 }
 
 // ----------------------------------------------------------------------------------------

@@ -55,5 +55,5 @@ input_rgb_image_sized<150>
 >>>>>>>>>>>>;
 
 void imageCluster ();
-
+void enRollDlibFaceRec();
 #endif /* ImageCluster_hpp */
