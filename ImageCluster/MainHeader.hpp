@@ -47,8 +47,9 @@
 
 #define THRESHOLD 0.5
 
+#define  CURRENTDIR  GetCurrentWorkingDirectory();
 #define  pathlandmarkdetector "/model/shape_predictor_68_face_landmarks.dat";
-#define  pathRESNETModel   "/model/dlib_face_recognition_resnet_model_v1.dat";
+#define  pathRESNETModel  "/model/dlib_face_recognition_resnet_model_v1.dat";
 
 
 using namespace cv;
@@ -61,6 +62,7 @@ using std::string;
 string GetExecutableDirectory(const char* argv0);
 bool ChangeDirectory(const char* dir);
 string GetCurrentWorkingDirectory();
+void copyFile(string SRC, string DEST, string filename);
 //
 
 void imageCluster ();

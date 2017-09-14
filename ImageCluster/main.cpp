@@ -7,6 +7,8 @@
 //
 
 #include "MainHeader.hpp"
+#include <sys/fcntl.h>
+
 int main(int argc, const char * argv[]) {
     imageCluster();
     return 0;
@@ -29,4 +31,53 @@ string GetCurrentWorkingDirectory() {
     return buf;
 }
 
-//
+
+void copyFile(string srcDirPath, string destDirPath, string fileName)
+{
+
+
+    string command = "mkdir -p " + destDirPath;
+    //cerr << endl << "Command = " <<  command.c_str() << endl << endl;
+    system(command.c_str());
+
+
+    DIR* pnWriteDir = NULL;    /*DIR Pointer to open Dir*/
+    pnWriteDir = opendir(destDirPath.c_str());
+    
+    if (!pnWriteDir)
+        cerr << endl << "ERROR! Write Directory can not be open" << endl;
+    
+    DIR* pnReadDir = NULL;    /*DIR Pointer to open Dir*/
+    pnReadDir = opendir(srcDirPath.c_str());
+    
+    if (!pnReadDir || !pnWriteDir)
+        cerr << endl <<"ERROR! Read or Write Directory can not be open" << endl << endl;
+    
+    else
+    {
+        string srcFilePath = srcDirPath + fileName;
+        const char * strSrcFileName = srcFilePath.c_str();
+        fstream in, out;
+        in.open(strSrcFileName, fstream::in|fstream::binary);
+        
+        if (in.is_open()) {
+            //cerr << endl << "Now reading file " << strSrcFileName << endl;
+            
+            string destFilePath = destDirPath + fileName;
+            const char * strDestFileName = destFilePath.c_str();
+            out.open(strDestFileName, fstream::out);
+            
+            char tmp;
+            while(in.read(&tmp, 1))
+            {
+                out.write(&tmp, 1);
+            }
+            out.close();
+            in.close();
+        }
+        else
+            cerr << endl << "ERROR! File Could not be open for reading" << endl;
+    }
+    closedir(pnReadDir);
+    closedir(pnWriteDir);
+}

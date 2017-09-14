@@ -19,8 +19,8 @@ void imageCluster () {
             break;
         case 2 :
             cout << "Showing will take some time based on how large the data ...  <<" << endl;
-            readImages();
-            //testDlibFaceRecImage();
+            //readImages();
+            testDlibFaceRecImage();
             break;
         default :
             cout << "Input the correct value" << endl;
@@ -44,11 +44,11 @@ void printVector(std::vector<T>& vec) {
 void enRollDlibFaceRec() {
     cout << "It will take some time to read the dlib model keep patience " << endl;
     // Initialize face detector, facial landmarks detector and face recognizer
-    string currectDir  = GetCurrentWorkingDirectory();
+    string currectDir  = CURRENTDIR ;
     String predictorPath, faceRecognitionModelPath;
-    predictorPath = currectDir + pathlandmarkdetector;
+    predictorPath =  currectDir + pathlandmarkdetector;
     
-    faceRecognitionModelPath =  currectDir + pathRESNETModel;
+    faceRecognitionModelPath =   currectDir + pathRESNETModel;
     frontal_face_detector faceDetector = get_frontal_face_detector();
     shape_predictor landmarkDetector;
     deserialize(predictorPath) >> landmarkDetector;
@@ -171,7 +171,7 @@ void enRollDlibFaceRec() {
     cout << "number of face labels " << faceLabels.size() << endl;
     
     // write label name map to disk
-    const string labelNameFile = "label_name.txt";
+    const string labelNameFile = textFilePath;
     ofstream of;
     of.open (labelNameFile);
     for (int m = 0; m < names.size(); m++) {
@@ -213,9 +213,9 @@ void enRollDlibFaceRec() {
 }
 
 void readImages() {
-    string currectDir  = GetCurrentWorkingDirectory();
+    string currectDir  = CURRENTDIR;
     String predictorPath, faceRecognitionModelPath;
-    predictorPath = currectDir + pathlandmarkdetector;
+    predictorPath =  currectDir + pathlandmarkdetector;
     
     faceRecognitionModelPath =  currectDir + pathRESNETModel;
     frontal_face_detector faceDetector = get_frontal_face_detector();
@@ -292,17 +292,18 @@ void separateImage(frontal_face_detector faceDetector,
                    // variable to hold any subfolders within person subFolders
                    std::vector<string> folderNames) {
     // Initialize face detector, facial landmarks detector and face recognizer
-    string currectDir = GetCurrentWorkingDirectory();
+    
     
     // read names, labels and labels-name-mapping from file
+    string currentDir = CURRENTDIR;
     std::map<int, string> labelNameMap;
     std::vector<string> names;
     std::vector<int> labels;
-    const string labelNameFile = "label_name.txt";
+    const string labelNameFile = currentDir + textFilePath;
     readLabelNameMap(labelNameFile, names, labels, labelNameMap);
     
     // read descriptors of enrolled faces from file
-    const string faceDescriptorFile = currectDir + pathDescriptorsCSV;
+    const string faceDescriptorFile =  currentDir + pathDescriptorsCSV;
     std::vector<int> faceLabels;
     std::vector<matrix<float,0,1>> faceDescriptors;
     readDescriptors(faceDescriptorFile, faceLabels, faceDescriptors);
@@ -313,9 +314,9 @@ void separateImage(frontal_face_detector faceDetector,
     //imagePath = currectDir + pathVaibhav;
     
     // iterate over images
-    for (int i = 0; i < imagePaths.size(); i++) {
-        string imagePath = imagePaths[i];
-        int imageLabel = imageLabels[i];
+    for (int index = 0; index < imagePaths.size(); index++) {
+        string imagePath = imagePaths[index];
+        int imageLabel = imageLabels[index];
         
         cout << "processing: " << imagePath << endl;
         
@@ -378,9 +379,14 @@ void separateImage(frontal_face_detector faceDetector,
              stream << fixed << setprecision(4) << minDistance;
              string text = stream.str(); // name + " " + std::to_string(minDistance);
              cv::putText(im, text, p1, FONT_HERSHEY_SIMPLEX, 0.8, Scalar(255, 0, 0), 2); */
-            if (minDistance < 0.7) {
-                string path = currectDir +  "/result/" + std::to_string(i) + "/" + std::to_string(i) + ".jpg";
-                cv:: imwrite(path, im);
+            cout.precision( numeric_limits<double>::digits + 1);
+            cout << "THis is the minimum distance for the current Image: " << fixed << minDistance  << endl;
+            if (label != -1) {
+                std::size_t pos = imagePath.find_last_of("/");
+                string value = imagePath.substr(pos);
+                string sorceDir = imagePath.substr(0, pos);
+                string destDir = currentDir +  resultPath + "Hello";
+                copyFile(sorceDir, destDir, value);
             }
         }
     }
@@ -392,10 +398,12 @@ void separateImage(frontal_face_detector faceDetector,
 }
 
 
+
+
 void testDlibFaceRecImage() {
     // Initialize face detector, facial landmarks detector and face recognizer
     String predictorPath, faceRecognitionModelPath;
-    string currectDir  = GetCurrentWorkingDirectory();
+    string currectDir  = CURRENTDIR
     predictorPath = currectDir + pathlandmarkdetector;
     faceRecognitionModelPath = currectDir + pathRESNETModel;
     frontal_face_detector faceDetector = get_frontal_face_detector();
@@ -408,7 +416,7 @@ void testDlibFaceRecImage() {
     std::map<int, string> labelNameMap;
     std::vector<string> names;
     std::vector<int> labels;
-    const string labelNameFile = "label_name.txt";
+    const string labelNameFile = currectDir + textFilePath;
     readLabelNameMap(labelNameFile, names, labels, labelNameMap);
     
     // read descriptors of enrolled faces from file

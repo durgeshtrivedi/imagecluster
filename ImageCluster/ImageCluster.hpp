@@ -12,9 +12,12 @@
 #include "FaceBlendCommon.hpp"
 
 
-string pathFace =   "/data/faces";
-string pathDescriptorsCSV= "/data/descriptors.csv";
+string pathFace =  "/data/faces";
+string resultPath =  "/result/";
+string pathDescriptorsCSV =  "/result/descriptors.csv";
 string pathVaibhav = "/data/faces/vaibhaw_query.jpg";
+string textFilePath =  "/result/label_name.txt";
+
 
 using namespace dlib;
 // ----------------------------------------------------------------------------------------
