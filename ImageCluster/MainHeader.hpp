@@ -58,10 +58,26 @@ using std::cout;
 using std::endl;
 using std::string;
 
+enum CLUSTER 
+{
+    CREATE_DESCRIPTOR       = -2,
+    NEW_FACE                = -1,
+};
+
 // Code specific to read Current Dir
 string GetExecutableDirectory(const char* argv0);
 bool ChangeDirectory(const char* dir);
 string GetCurrentWorkingDirectory();
+
+inline bool fileExist (const std::string& name) {
+    if (FILE *file = fopen(name.c_str(), "r")) {
+        fclose(file);
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void copyFile(string SRC, string DEST, string filename);
 //
 

@@ -56,13 +56,19 @@ input_rgb_image_sized<150>
 
 void imageCluster ();
 void enRollDlibFaceRec();
-void testDlibFaceRecImage();
-void readImages();;
+
+int faceMatch(matrix<float,0,1> &faceDescriptorQuery, std::vector<int> &faceLabels);
+void writeDescriptors(std::vector<int> &faceLabels, std::vector<matrix<float,0,1>> &faceDescriptors);
+void readFolder(std::vector<string> &imagePaths,
+                std::vector<int> &imageLabels);
+void saveDescriptor(string imagePath,
+                             matrix<float,0,1> &faceDescriptorQuery,
+                             std::vector<matrix<float,0,1>> &faceDescriptors,
+                             std::vector<int> &faceLabels,
+                              char  &alphabet);
 void separateImage(frontal_face_detector faceDetector,
                    shape_predictor landmarkDetector,
                    anet_type net,
                    std::vector<string> imagePaths,
-                   std::vector<int> imageLabels,
-                   // variable to hold any subfolders within person subFolders
-                   std::vector<string> folderNames);
+                   std::vector<int> imageLabels);
 #endif /* ImageCluster_hpp */
