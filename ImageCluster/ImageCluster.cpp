@@ -10,7 +10,7 @@
 
 void imageCluster () {
     int index;
-    cout << "You want to Segregate all your images based on faces. Please enter 1 :";
+    cout << "You want to Segregate all your images based on faces. Please enter 1 :" << endl;
     cin >> index;
     while(std::cin.fail()) {
         cout << "Input the correct value it should be integer only." << endl;
@@ -265,7 +265,8 @@ void readFolder(std::vector<string> &imagePaths,
         // read all files present in subFolder
         listdir(subfolders[i], folderNames, fileNames, symlinkNames);
         // filter only jpg files
-        filterFiles(subfolders[i], fileNames, imagePaths, "jpg");
+        std::vector<string> extensions{"jpg","png"};
+        filterFiles(subfolders[i], fileNames, imagePaths, extensions);
         // add label i for all ajpg files found in subFolder
         for (int j = 0; j < imagePaths.size(); j++) {
             imageLabels.push_back(i);

@@ -51,6 +51,9 @@
 #define  pathlandmarkdetector "/model/shape_predictor_68_face_landmarks.dat";
 #define  pathRESNETModel  "/model/dlib_face_recognition_resnet_model_v1.dat";
 
+#define STRTOLOWER(x) std::transform (x.begin(), x.end(), x.begin(), ::tolower)
+#define STRTOUPPER(x) std::transform (x.begin(), x.end(), x.begin(), ::toupper)
+#define STRTOUCFIRST(x) std::transform (x.begin(), x.begin()+1, x.begin(),  ::toupper); std::transform (x.begin()+1, x.end(),   x.begin()+1,::tolower)
 
 using namespace cv;
 using namespace std;

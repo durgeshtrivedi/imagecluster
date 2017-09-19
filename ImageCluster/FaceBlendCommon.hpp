@@ -37,7 +37,7 @@ void readDescriptors(const string& filename, std::vector<int>& faceLabels, std::
 void nearestNeighbor(dlib::matrix<float, 0, 1>& faceDescriptorQuery,
                      std::vector<dlib::matrix<float, 0, 1>>& faceDescriptors,
                      std::vector<int>& faceLabels, int& label, float& minDistance);
-void filterFiles(string dirPath, std::vector<string>& fileNames, std::vector<string>& filteredFilePaths, string ext);
+void filterFiles(string dirPath, std::vector<string>& fileNames, std::vector<string>& filteredFilePaths, std::vector<string> extensions);
 void listdir(string dirName, std::vector<string>& folderNames, std::vector<string>& fileNames, std::vector<string>& symlinkNames);
 
 

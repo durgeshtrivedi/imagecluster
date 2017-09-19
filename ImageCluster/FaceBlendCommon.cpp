@@ -133,12 +133,15 @@ void nearestNeighbor(dlib::matrix<float, 0, 1>& faceDescriptorQuery,
 }
 
 // filter files having extension ext
-void filterFiles(string dirPath, std::vector<string>& fileNames, std::vector<string>& filteredFilePaths, string ext)
+void filterFiles(string dirPath, std::vector<string>& fileNames, std::vector<string>& filteredFilePaths, std:: vector<string> ext)
 {
     for(int i = 0; i < fileNames.size(); i++)
     {
         string fname = fileNames[i];
-        if (fname.find(ext, (fname.length() - ext.length())) != std::string::npos)
+        string value = fname.substr(fname.find_last_of(".") + 1);
+        STRTOLOWER(value);
+        std::vector<std::string>::iterator iter = find(ext.begin(), ext.end(), value);
+        if (iter != ext.end())
         {
             filteredFilePaths.push_back(dirPath + "/" + fname);
         }
