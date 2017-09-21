@@ -41,6 +41,7 @@
 #include <dlib/image_processing.h>
 #include <dlib/image_processing/frontal_face_detector.h>
 
+#include <sys/stat.h>
 #define faceWidth 64
 #define faceHeight 64
 #define PI 3.14159265
@@ -55,16 +56,29 @@
 #define STRTOUPPER(x) std::transform (x.begin(), x.end(), x.begin(), ::toupper)
 #define STRTOUCFIRST(x) std::transform (x.begin(), x.begin()+1, x.begin(),  ::toupper); std::transform (x.begin()+1, x.end(),   x.begin()+1,::tolower)
 
+
+#define ENUM_TO_STR(ENUM) std::string(#ENUM)
+
 using namespace cv;
 using namespace std;
 using std::cout;
 using std::endl;
 using std::string;
 
-enum CLUSTER 
+#define  CREATE_DESCRIPTOR  "DESCRIPTOR"
+#define  NEW_FACE "NEWFACE"
+
+enum FACES
 {
-    CREATE_DESCRIPTOR       = -2,
-    NEW_FACE                = -1,
+    UNKNOWN,
+    NEWFACE
+};
+enum OPTIONS
+{
+    OPTION_1_CLUSTER_ALL_FACES          = 100,
+    OPTION_2_READ_FIRST_FOLDERS         = 101,
+    OPTION_2_READ_FIRST_THAN_CLUSTER    = 102,
+    OPTION_EXIT                         = 0
 };
 
 // Code specific to read Current Dir

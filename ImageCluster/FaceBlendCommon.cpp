@@ -7,7 +7,9 @@
 //
 
 #include "FaceBlendCommon.hpp"
-
+extern string rootDirPath;
+extern string resultDirPath;
+extern string facesDirPath;
 Mat getCroppedFaceRegion(Mat image, std::vector<Point2f> landmarks, cv::Rect &selectedRegion)
 {
     int x1Limit = landmarks[0].x - (landmarks[36].x - landmarks[0].x);
@@ -56,7 +58,7 @@ void readLabelNameMap(const string& filename, std::vector<string>& names, std::v
 }
 
 // read descriptors saved on disk
-void readDescriptors(const string& filename, std::vector<int>& faceLabels, std::vector<matrix<float,0,1>>& faceDescriptors, char separator) {
+void readDescriptors(const string& filename, std::vector<string>& faceLabels, std::vector<matrix<float,0,1>>& faceDescriptors, char separator) {
     std::ifstream file(filename.c_str(), ifstream::in);
     if (!file) {
         string error_message = "No valid input file was given, please check the given filename.";
@@ -79,7 +81,7 @@ void readDescriptors(const string& filename, std::vector<int>& faceLabels, std::
         // read first word on a line till separator
         getline(liness, faceLabel, separator);
         if(!faceLabel.empty()) {
-            faceLabels.push_back(std::atoi(faceLabel.c_str()));
+            faceLabels.push_back(faceLabel);
         }
         
         faceDescriptorVec.clear();
@@ -101,10 +103,10 @@ void readDescriptors(const string& filename, std::vector<int>& faceLabels, std::
 // to a query face descriptor
 void nearestNeighbor(dlib::matrix<float, 0, 1>& faceDescriptorQuery,
                      std::vector<dlib::matrix<float, 0, 1>>& faceDescriptors,
-                     std::vector<int>& faceLabels, int& label, float& minDistance) {
+                     std::vector<string>& faceLabels, string &label, float& minDistance) {
     int minDistIndex = 0;
     minDistance = 1.0;
-    label = -1;
+    label = NEW_FACE;
     // Calculate Euclidean distances between face descriptor calculated on face dectected
     // in current frame with all the face descriptors we calculated while enrolling faces
     // Calculate minimum distance and index of this face
@@ -124,9 +126,9 @@ void nearestNeighbor(dlib::matrix<float, 0, 1>& faceDescriptorQuery,
     // enrolled images and query image
     // We are using a threshold of 0.5
     // if minimum distance is greater than a threshold
-    // assign integer label -1 i.e. unknown face
+    // assign integer label -1 or NEW_FACE i.e. unknown face
     if (minDistance > THRESHOLD){
-        label = -1;
+        label = NEW_FACE;
     } else {
         label = faceLabels[minDistIndex];
     }
@@ -183,5 +185,34 @@ void listdir(string dirName, std::vector<string>& folderNames, std::vector<strin
         std::sort(symlinkNames.begin(), symlinkNames.end());
         closedir(dir);
     }
+}
+
+bool is_file(const char* path) {
+    struct stat buf;
+    stat(path, &buf);
+    return S_ISREG(buf.st_mode);
+}
+
+bool is_dir(const char* path) {
+    struct stat buf;
+    stat(path, &buf);
+    return S_ISDIR(buf.st_mode);
+}
+bool isRootDir(string rootDir) {
+    
+    if (is_dir(rootDir.c_str()) == true) {
+        //string imagesDir = rootDir.find_last_of("/");
+        std::size_t pos = rootDir.find_last_of("/");
+        string imagesDir = rootDir.substr(pos+1);
+        string facesPath = rootDir.substr(0, pos);
+        // Keep the root dir path to faces
+        rootDirPath = facesPath;
+        string facesDir = facesPath.substr(facesPath.find_last_of("/")+1);
+        if (imagesDir.compare("images") == 0 && facesDir.compare("faces") == 0) {
+            return true;
+        }
+        return true;
+    }
+        return false;
 }
 

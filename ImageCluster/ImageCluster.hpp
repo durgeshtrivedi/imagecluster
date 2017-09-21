@@ -55,17 +55,28 @@ input_rgb_image_sized<150>
 >>>>>>>>>>>>;
 
 void imageCluster ();
-void enRollDlibFaceRec();
+void allImageDirector(OPTIONS option);
+void clusterFaces(OPTIONS options);
+void clusterAllFaces(string label,
+                     string imagePath,
+                     matrix<float,0,1> &faceDescriptorQuery,
+                     std::vector<matrix<float,0,1>> &faceDescriptors,
+                     std::vector<string> &faceLabels,
+                     char  &alphabet);
 
-int faceMatch(matrix<float,0,1> &faceDescriptorQuery, std::vector<int> &faceLabels);
-void writeDescriptors(std::vector<int> &faceLabels, std::vector<matrix<float,0,1>> &faceDescriptors);
+string faceMatch(matrix<float,0,1> &faceDescriptorQuery, std::vector<string> &faceLabels);
+
+void writeDescriptors(std::vector<string> &faceLabels, std::vector<matrix<float,0,1>> &faceDescriptors);
+
 void readFolder(std::vector<string> &imagePaths,
-                std::vector<int> &imageLabels);
+                std::vector<string> &imageLabels);
+void moveSelectedFaces(string label, string imagePath);
+void saveFile(string label, string imagePath);
 void saveDescriptor(string imagePath,
                              matrix<float,0,1> &faceDescriptorQuery,
                              std::vector<matrix<float,0,1>> &faceDescriptors,
-                             std::vector<int> &faceLabels,
-                              char  &alphabet);
+                             std::vector<string> &faceLabels,
+                              string  &alphabet);
 void separateImage(frontal_face_detector faceDetector,
                    shape_predictor landmarkDetector,
                    anet_type net,

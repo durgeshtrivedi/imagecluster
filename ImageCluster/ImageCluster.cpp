@@ -8,9 +8,21 @@
 
 #include "ImageCluster.hpp"
 
+string rootDirPath  = "";
+string resultDirPath = "";
+string facesDirPath = "";
 void imageCluster () {
     int index;
-    cout << "You want to Segregate all your images based on faces. Please enter 1 :" << endl;
+    cout << "You have mutiple options to chose from." << endl << endl;
+    cout << "1. You want to Segregate all your images based on faces." << endl <<endl;;
+    
+    cout << "2. If you want to segregate only images with particular person init from a group of images\n"
+    <<"   then you need to provide 1 or 2 images of that person in a folder with the name you would like  \n"
+    <<"   to have so that system can learn which images only you want, you can also keep mutiple folder\n"
+    <<"   with different person in it to get all the images of those person only in those folder."<< endl;
+    cout << "3. 0 to exit the app." << endl << endl;
+    cout << "Enter your option :";
+    std::cin.clear();
     cin >> index;
     while(std::cin.fail()) {
         cout << "Input the correct value it should be integer only." << endl;
@@ -19,11 +31,15 @@ void imageCluster () {
         imageCluster ();
     }
     switch (index) {
-        case 1 :
-            cout << "Reading all the images to enroll will take some time Keep patience ... <<" << endl;
-            enRollDlibFaceRec();
+        case 0: exit(0);
             break;
-            
+        case 1 :
+             allImageDirector(OPTION_1_CLUSTER_ALL_FACES);
+            break;
+        case 2 :
+            clusterFaces(OPTION_2_READ_FIRST_THAN_CLUSTER);
+            break;
+
         default :
             cout << "Input the correct value" << endl;
             imageCluster ();
@@ -31,6 +47,19 @@ void imageCluster () {
     }
 }
 
+void allImageDirector(OPTIONS option) {
+    cout << "Please enter the path for your images dir. It should be like   ../faces/images \n";
+    cout << "Means your path suppose to end with structure /faces/images  other wise it will not work. This is a limitation for right now." << endl;
+    cout << "Enter the images path :";
+    cin.clear();
+    rootDirPath = "";
+    //istringstream (rootDirPath);
+   // getline(cin, rootDirPath);
+    cin >> rootDirPath;
+    isRootDir(rootDirPath) == false ? allImageDirector(option)
+                                      :clusterFaces(option);
+
+}
 // ----------------------------------------------------------------------------------------
 
 template<typename T>
@@ -42,7 +71,7 @@ void printVector(std::vector<T>& vec) {
 }
 
 
-void enRollDlibFaceRec() {
+void clusterFaces(OPTIONS options) {
     cout << "It will take some time to read the dlib model keep patience " << endl;
     // Initialize face detector, facial landmarks detector and face recognizer
     string currentDir  = CURRENTDIR ;
@@ -56,7 +85,7 @@ void enRollDlibFaceRec() {
     anet_type net;
     deserialize(faceRecognitionModelPath) >> net;
     std::vector<string> imagePaths;
-    std::vector<int> imageLabels;
+    std::vector<string> imageLabels;
     
     readFolder(imagePaths, imageLabels);
     
@@ -68,7 +97,7 @@ void enRollDlibFaceRec() {
         // We will store face descriptors in vector faceDescriptors
         // and their corresponding labels in vector faceLabels
         std::vector<matrix<float,0,1>> faceDescriptors;
-        std::vector<int> faceLabels;
+        std::vector<string> faceLabels;
         
         cout << "processing: " << imagePath << endl;
         
@@ -104,48 +133,80 @@ void enRollDlibFaceRec() {
             matrix<float,0,1> faceDescriptorQuery = net(face_chip);
             
             // Match the face already in the model
-            int label = faceMatch(faceDescriptorQuery, faceLabels);
+            string label = faceMatch(faceDescriptorQuery, faceLabels);
             
-            switch (label) {
-                case CREATE_DESCRIPTOR:
-                    // If there is no descriptor file save model for first time
-                    saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, alphabet);
+            switch (options) {
+                case OPTION_1_CLUSTER_ALL_FACES:
+                    clusterAllFaces(label, imagePath,faceDescriptorQuery,faceDescriptors,faceLabels,alphabet);
                     break;
-                    // update model with new Face Match
-                case NEW_FACE:
-                    // Change the folder name before saving it as new face nmatch
-                    alphabet++;
-                    saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, alphabet);
+                case OPTION_2_READ_FIRST_FOLDERS:
+                    
+                    saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, label);
+                    break;
+                case OPTION_2_READ_FIRST_THAN_CLUSTER:
+                    // This will save all known face and discreptor file should also already created
+                    moveSelectedFaces(label, imagePath);
                     break;
                 default:
-                {
-                    // update model with new learning data
-                    // If model match the face copy the file inside the label path
-                    std::size_t pos = imagePath.find_last_of("/");
-                    string value = imagePath.substr(pos);
-                    string sorceDir = imagePath.substr(0, pos);
-                    string destDir = currentDir +  resultPath + (char)label;
-                    copyFile(sorceDir, destDir, value);
-                }
                     break;
             }
         }
     }
+    
+    if (options == OPTION_2_READ_FIRST_FOLDERS) {
+        clusterFaces(OPTION_2_READ_FIRST_THAN_CLUSTER);
+    }
     return ;
 }
 
-void saveDescriptor(string imagePath,
-                    matrix<float,0,1> &faceDescriptorQuery,
-                    std::vector<matrix<float,0,1>> &faceDescriptors,
-                    std::vector<int> &faceLabels,
-                    char  &alphabet) {
+void clusterAllFaces(string label,
+                     string imagePath,
+                     matrix<float,0,1> &faceDescriptorQuery,
+                     std::vector<matrix<float,0,1>> &faceDescriptors,
+                     std::vector<string> &faceLabels,
+                     char  &alphabet)
+{
+   
+    if (label == CREATE_DESCRIPTOR) {
+        // If there is no descriptor file save model for first time
+         string alpha(1, alphabet);
+        saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, alpha);
+    }
+    // update model with new Face Match
+    else if  (label == NEW_FACE) {
+        // Change the folder name before saving it as new face nmatch
+         alphabet++;
+         string alpha(1, alphabet);
+        saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, alpha);
+    }
+    else {
+        saveFile(label, imagePath);
+    }
     
-    string currentDir  = CURRENTDIR ;
+
+    
+}
+void moveSelectedFaces(string label, string imagePath) {
+    if (label != CREATE_DESCRIPTOR && label != NEW_FACE ) {
+        saveFile(label, imagePath);
+    }
+}
+
+void saveFile(string label, string imagePath) {
+    string currentDir  = rootDirPath ;
     std::size_t pos = imagePath.find_last_of("/");
     string value = imagePath.substr(pos);
     string sorceDir = imagePath.substr(0, pos);
-    string destDir = currentDir +  resultPath + (char)alphabet;
+    string destDir = currentDir +  resultPath + label;
     copyFile(sorceDir, destDir, value);
+}
+void saveDescriptor(string imagePath,
+                    matrix<float,0,1> &faceDescriptorQuery,
+                    std::vector<matrix<float,0,1>> &faceDescriptors,
+                    std::vector<string> &faceLabels,
+                    string  &alphabet) {
+    
+    saveFile(alphabet, imagePath);
     
     // if label is -1 clear the faceLabels, faceDescriptors
     faceLabels.clear();
@@ -160,11 +221,11 @@ void saveDescriptor(string imagePath,
     // save the label and descriptor to the file
     writeDescriptors(faceLabels,faceDescriptors);
 }
-void writeDescriptors(std::vector<int> &faceLabels, std::vector<matrix<float,0,1>> &faceDescriptors) {
+void writeDescriptors(std::vector<string> &faceLabels, std::vector<matrix<float,0,1>> &faceDescriptors) {
     cout << "number of face descriptors " << faceDescriptors.size() << endl;
     cout << "number of face labels " << faceLabels.size() << endl;
     
-    string currentDir = CURRENTDIR;
+    string currentDir = rootDirPath;
     
     
     // write face labels and descriptor to disk
@@ -195,35 +256,35 @@ void writeDescriptors(std::vector<int> &faceLabels, std::vector<matrix<float,0,1
     
 }
 
-int faceMatch(matrix<float,0,1> &faceDescriptorQuery, std::vector<int> &faceLabels) {
+string faceMatch(matrix<float,0,1> &faceDescriptorQuery, std::vector<string> &faceLabels) {
     
-    string currentDir = CURRENTDIR;
+    string currentDir = rootDirPath;
     // read descriptors of enrolled faces from file
     const string faceDescriptorFile =  currentDir + pathDescriptorsCSV;
     
     if (fileExist(faceDescriptorFile) == false) {
         // The pathDescriptor file doesn't exist means file not yet created and it is first face
-        return -2;
+        return CREATE_DESCRIPTOR;
     }
     
     std::vector<matrix<float,0,1>> faceDescriptors;
     readDescriptors(faceDescriptorFile, faceLabels, faceDescriptors);
     
     // Find closest face enrolled to face found in frame
-    int label;
+    string label;
     float minDistance;
     nearestNeighbor(faceDescriptorQuery, faceDescriptors, faceLabels, label, minDistance);
     return label;
 }
 void readFolder(std::vector<string> &imagePaths,
-                std::vector<int> &imageLabels) {
+                std::vector<string> &imageLabels) {
     
     // Now let's prepare our training data
     // data is organized assuming following structure
     // faces folder has subfolders.
     // each subfolder has images of a person
-    string currentDir = CURRENTDIR ;
-    string faceDatasetFolder = currentDir + pathFace;
+    string currentDir = rootDirPath ;
+    string faceDatasetFolder = currentDir; //+ pathFace;
     std::vector<string> subfolders, fileNames, symlinkNames;
     // fileNames and symlinkNames are useless here
     // as we are looking for sub-directories only
@@ -232,12 +293,12 @@ void readFolder(std::vector<string> &imagePaths,
     // names: vector containing names of subfolders i.e. persons
     // labels: integer labels assigned to persons
     // labelNameMap: dict containing (integer label, person name) pairs
-    std::vector<string> names;
-    std::vector<int> labels;
-    std::map<int, string> labelNameMap;
+  //  std::vector<string> names;
+   // std::vector<int> labels;
+   // std::map<int, string> labelNameMap;
     // add -1 integer label for un-enrolled persons
-    names.push_back("unknown");
-    labels.push_back(-1);
+   // names.push_back("unknown");
+   // labels.push_back(-1);
     
     // variable to hold any subfolders within person subFolders
     std::vector<string> folderNames;
@@ -249,11 +310,12 @@ void readFolder(std::vector<string> &imagePaths,
         string name = personFolderName.substr(found+1);
         // assign integer label to person subFolder
         int label = i;
+       
         // add person name and label to vectors
-        names.push_back(name);
-        labels.push_back(label);
+        //names.push_back(name);
+        //labels.push_back(label);
         // add (integer label, person name) pair to map
-        labelNameMap[label] = name;
+        //labelNameMap[label] = name;
         
         // read imagePaths from each person subFolder
         // clear vectors
@@ -268,8 +330,8 @@ void readFolder(std::vector<string> &imagePaths,
         std::vector<string> extensions{"jpg","png"};
         filterFiles(subfolders[i], fileNames, imagePaths, extensions);
         // add label i for all ajpg files found in subFolder
-        for (int j = 0; j < imagePaths.size(); j++) {
-            imageLabels.push_back(i);
-        }
+        //for (int j = 0; j < imagePaths.size(); j++) {
+          //  imageLabels.push_back(i);
+        //}
     }
 }
