@@ -58,22 +58,35 @@ void allImageDirector(OPTIONS option) {
 bool readRootDir() {
     cout << "Please enter the path for your images dir. It should be like   ../faces/images \n";
     cout << "Means your path suppose to end with structure /faces/images  other wise it will not work. This is a limitation for right now." << endl;
+    cout << "Drag and Drop is not working for dir path so you need to type or copy paste it, its a limitation right now" << endl << endl;
+    cout << "Type 'exit' for path to exit the app" << endl << endl;
     cout << "Enter the images path :";
     cin.clear();
     rootDirPath = "";
     // getline(cin, rootDirPath);
     cin >> rootDirPath;
+    if (rootDirPath == "exit") {
+        exit(0);
+    }
     return isRootDir(rootDirPath);
 }
 
 bool userDir() {
-    cout << "Enter the path for your folder where you want only specific images based on the folder inside it. It should be like   ../Myfaces/foldername \n";
-    cout << "Means your path suppose to end with structure /Myfaces all the images should be inside some folder in MYfaces folder  other wise it will not work. This is a limitation for right now." << endl;
-    cout << "Enter the path Myfaces:";
+    cout << endl<< endl;
+    
+    cout << "Enter the path for your folder where you want only specific images based on the folder inside it.\nIt should be like   ../MyFaces/foldername \n";
+    cout << "Means your path suppose to end with structure /MyFaces all the images should be inside some folder in\n'MyFaces'folder other wise it will not work.This is a limitation for right now." << endl;
+    cout << "Drag and Drop is not working for Dir path so you need to type or copy paste it, its a limitation right now" << endl << endl;
+    cout << "Type 'exit' for path to exit the app" << endl << endl;
+    cout << "Enter the path MyFaces :";
     cin.clear();
     facesDirPath = "";
     // getline(cin, rootDirPath);
     cin >> facesDirPath;
+    
+    if (facesDirPath == "exit") {
+        exit(0);
+    }
     return isFacesDir(facesDirPath);
 }
 
@@ -100,7 +113,7 @@ void printVector(std::vector<T>& vec) {
 
 
 void clusterFaces(OPTIONS options) {
-    cout << "It will take some time to read the dlib model keep patience " << endl;
+    cout << "It will take some time to read the  model keep patience " << endl;
     // Initialize face detector, facial landmarks detector and face recognizer
     string currentDir  = CURRENTDIR ;
     String predictorPath, faceRecognitionModelPath;
@@ -175,7 +188,6 @@ void clusterFaces(OPTIONS options) {
                     clusterAllFaces(label, imagePath,faceDescriptorQuery,faceDescriptors,faceLabels,alphabet);
                     break;
                 case OPTION_2_READ_FIRST_FOLDERS:
-                    
                      clusterUserFaces(label, imagePath,faceDescriptorQuery,faceDescriptors,faceLabels);
                     break;
                 case OPTION_2_READ_FIRST_THAN_CLUSTER:
@@ -209,7 +221,7 @@ void clusterAllFaces(string label,
     }
     // update model with new Face Match
     else if  (label == NEW_FACE) {
-        // Change the folder name before saving it as new face nmatch
+        // Change the folder name before saving it as new face match
          alphabet++;
          string alpha(1, alphabet);
         saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, alpha);
@@ -347,8 +359,7 @@ void readFolder(std::vector<string> &imagePaths,
     // data is organized assuming following structure
     // faces folder has subfolders.
     // each subfolder has images of a person
-    string currentDir = rootDirPath ;
-    string faceDatasetFolder = currentDir; //+ pathFace;
+    string faceDatasetFolder = rootDirPath;
     std::vector<string> subfolders, fileNames, symlinkNames;
     // fileNames and symlinkNames are useless here
     // as we are looking for sub-directories only
@@ -369,6 +380,5 @@ void readFolder(std::vector<string> &imagePaths,
         // filter only jpg files
         std::vector<string> extensions{"jpg","png"};
         filterFiles(subfolders[i], fileNames, imagePaths, extensions);
-
     }
 }

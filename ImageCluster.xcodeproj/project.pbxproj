@@ -82,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				9DF873D21F696D5300288B77 /* data */,
-				9DF873CE1F69573B00288B77 /* resources */,
 				9D9945FD1F6691CE00F32F13 /* model */,
 				9D9945F61F66910800F32F13 /* lib */,
 				9D8D5D3C1F66899700F46A1B /* main.cpp */,
@@ -118,21 +117,6 @@
 				9DF873C61F66D75200288B77 /* Accelerate.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9DF873CE1F69573B00288B77 /* resources */ = {
-			isa = PBXGroup;
-			children = (
-				9DF873CF1F69573B00288B77 /* images */,
-			);
-			path = resources;
-			sourceTree = "<group>";
-		};
-		9DF873CF1F69573B00288B77 /* images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 		9DF873D21F696D5300288B77 /* data */ = {
