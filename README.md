@@ -1,5 +1,10 @@
 # README #
 
+### About Project ###
+
+This project is created based on the learning I got form the course http://www.learnopencv.com/ it is using Opencv and dlib based deeplearning for images cluster 
+It is part of the final project for the course.
+
 If you try to run the project and you are faceing issue just look into  PROJECT SETUP section else follow RUN section  
 
 ### RUN THE PROJECT ###
