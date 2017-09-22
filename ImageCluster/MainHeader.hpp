@@ -95,8 +95,10 @@ inline bool fileExist (const std::string& name) {
     }
 }
 
+void imageCluster ();
+
+bool is_dir(const char* path);
+bool is_file(const char* path);
 void copyFile(string SRC, string DEST, string filename);
 //
-
-void imageCluster ();
 #endif /* MainHeader_h */

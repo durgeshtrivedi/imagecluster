@@ -55,6 +55,9 @@ input_rgb_image_sized<150>
 >>>>>>>>>>>>;
 
 void imageCluster ();
+void userFolderDir();
+bool readRootDir();
+
 void allImageDirector(OPTIONS option);
 void clusterFaces(OPTIONS options);
 void clusterAllFaces(string label,
@@ -63,8 +66,12 @@ void clusterAllFaces(string label,
                      std::vector<matrix<float,0,1>> &faceDescriptors,
                      std::vector<string> &faceLabels,
                      char  &alphabet);
-
-string faceMatch(matrix<float,0,1> &faceDescriptorQuery, std::vector<string> &faceLabels);
+void clusterUserFaces(string label,
+                      string imagePath,
+                      matrix<float,0,1> &faceDescriptorQuery,
+                      std::vector<matrix<float,0,1>> &faceDescriptors,
+                      std::vector<string> &faceLabels);
+string faceMatch(string descriptorDir, matrix<float,0,1> &faceDescriptorQuery, std::vector<string> &faceLabels);
 
 void writeDescriptors(std::vector<string> &faceLabels, std::vector<matrix<float,0,1>> &faceDescriptors);
 

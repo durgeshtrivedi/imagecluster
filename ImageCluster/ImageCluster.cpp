@@ -11,6 +11,7 @@
 string rootDirPath  = "";
 string resultDirPath = "";
 string facesDirPath = "";
+string testDataDir = "";
 void imageCluster () {
     int index;
     cout << "You have mutiple options to chose from." << endl << endl;
@@ -37,7 +38,7 @@ void imageCluster () {
              allImageDirector(OPTION_1_CLUSTER_ALL_FACES);
             break;
         case 2 :
-            clusterFaces(OPTION_2_READ_FIRST_THAN_CLUSTER);
+            userFolderDir();
             break;
 
         default :
@@ -48,17 +49,44 @@ void imageCluster () {
 }
 
 void allImageDirector(OPTIONS option) {
+      readRootDir() == false
+                            ? allImageDirector(option)
+                            :clusterFaces(option);
+
+}
+
+bool readRootDir() {
     cout << "Please enter the path for your images dir. It should be like   ../faces/images \n";
     cout << "Means your path suppose to end with structure /faces/images  other wise it will not work. This is a limitation for right now." << endl;
     cout << "Enter the images path :";
     cin.clear();
     rootDirPath = "";
-    //istringstream (rootDirPath);
-   // getline(cin, rootDirPath);
+    // getline(cin, rootDirPath);
     cin >> rootDirPath;
-    isRootDir(rootDirPath) == false ? allImageDirector(option)
-                                      :clusterFaces(option);
+    return isRootDir(rootDirPath);
+}
 
+bool userDir() {
+    cout << "Enter the path for your folder where you want only specific images based on the folder inside it. It should be like   ../Myfaces/foldername \n";
+    cout << "Means your path suppose to end with structure /Myfaces all the images should be inside some folder in MYfaces folder  other wise it will not work. This is a limitation for right now." << endl;
+    cout << "Enter the path Myfaces:";
+    cin.clear();
+    facesDirPath = "";
+    // getline(cin, rootDirPath);
+    cin >> facesDirPath;
+    return isFacesDir(facesDirPath);
+}
+
+void userFolderDir() {
+    if (readRootDir() == true) {
+        if (userDir() == true) {
+            clusterFaces(OPTION_2_READ_FIRST_FOLDERS);
+        } else {
+            userFolderDir();
+        }
+    }else {
+        userFolderDir();
+    }
 }
 // ----------------------------------------------------------------------------------------
 
@@ -87,6 +115,12 @@ void clusterFaces(OPTIONS options) {
     std::vector<string> imagePaths;
     std::vector<string> imageLabels;
     
+    if (options == OPTION_2_READ_FIRST_FOLDERS) {
+        testDataDir = rootDirPath; // stroe the path for root dir in testDir path which we use for filtering
+        rootDirPath = facesDirPath;  // now facedir is rootdir to filter the face based up for enrolling.
+    } else if (options == OPTION_2_READ_FIRST_THAN_CLUSTER) {
+        rootDirPath = testDataDir;
+    }
     readFolder(imagePaths, imageLabels);
     
     char alphabet = 'A';
@@ -132,8 +166,9 @@ void clusterFaces(OPTIONS options) {
             // It is a 128D vector that describes the face in img identified by shape.
             matrix<float,0,1> faceDescriptorQuery = net(face_chip);
             
+            string descriptorDir = options == OPTION_2_READ_FIRST_THAN_CLUSTER ? facesDirPath : rootDirPath;
             // Match the face already in the model
-            string label = faceMatch(faceDescriptorQuery, faceLabels);
+            string label = faceMatch(descriptorDir, faceDescriptorQuery, faceLabels);
             
             switch (options) {
                 case OPTION_1_CLUSTER_ALL_FACES:
@@ -141,7 +176,7 @@ void clusterFaces(OPTIONS options) {
                     break;
                 case OPTION_2_READ_FIRST_FOLDERS:
                     
-                    saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, label);
+                     clusterUserFaces(label, imagePath,faceDescriptorQuery,faceDescriptors,faceLabels);
                     break;
                 case OPTION_2_READ_FIRST_THAN_CLUSTER:
                     // This will save all known face and discreptor file should also already created
@@ -182,9 +217,38 @@ void clusterAllFaces(string label,
     else {
         saveFile(label, imagePath);
     }
-    
+}
 
-    
+
+void clusterUserFaces(string label,
+                     string imagePath,
+                     matrix<float,0,1> &faceDescriptorQuery,
+                     std::vector<matrix<float,0,1>> &faceDescriptors,
+                     std::vector<string> &faceLabels)
+{
+    if (label == CREATE_DESCRIPTOR || label == NEW_FACE) {
+        std::size_t pos = imagePath.find_last_of("/");
+        string  imageDirPath = imagePath.substr(0, pos);
+        string labelName = imageDirPath.substr(imageDirPath.find_last_of("/")+1);
+        faceLabels.clear();
+        faceDescriptors.clear();
+        // add face descriptor and label for this face to
+        // vectors faceDescriptors and faceLabels
+        faceDescriptors.push_back(faceDescriptorQuery);
+        // add label for this face to vector containing labels corresponding to
+        // vector containing face descriptors
+        faceLabels.push_back(labelName);
+        
+        string resultDir  =  rootDirPath + resultPath;
+        // create result dir
+        if (is_dir(resultDir.c_str()) == false) {
+            string command = "mkdir -p " + resultDir;
+            system(command.c_str());
+        }
+        // save the label and descriptor to the file
+        writeDescriptors(faceLabels,faceDescriptors);
+    }
+
 }
 void moveSelectedFaces(string label, string imagePath) {
     if (label != CREATE_DESCRIPTOR && label != NEW_FACE ) {
@@ -256,11 +320,11 @@ void writeDescriptors(std::vector<string> &faceLabels, std::vector<matrix<float,
     
 }
 
-string faceMatch(matrix<float,0,1> &faceDescriptorQuery, std::vector<string> &faceLabels) {
+string faceMatch(string descriptorDir, matrix<float,0,1> &faceDescriptorQuery, std::vector<string> &faceLabels) {
     
-    string currentDir = rootDirPath;
+    //string currentDir = rootDirPath;
     // read descriptors of enrolled faces from file
-    const string faceDescriptorFile =  currentDir + pathDescriptorsCSV;
+    const string faceDescriptorFile =  descriptorDir + pathDescriptorsCSV;
     
     if (fileExist(faceDescriptorFile) == false) {
         // The pathDescriptor file doesn't exist means file not yet created and it is first face
@@ -289,34 +353,10 @@ void readFolder(std::vector<string> &imagePaths,
     // fileNames and symlinkNames are useless here
     // as we are looking for sub-directories only
     listdir(faceDatasetFolder, subfolders, fileNames, symlinkNames);
-    
-    // names: vector containing names of subfolders i.e. persons
-    // labels: integer labels assigned to persons
-    // labelNameMap: dict containing (integer label, person name) pairs
-  //  std::vector<string> names;
-   // std::vector<int> labels;
-   // std::map<int, string> labelNameMap;
-    // add -1 integer label for un-enrolled persons
-   // names.push_back("unknown");
-   // labels.push_back(-1);
-    
     // variable to hold any subfolders within person subFolders
     std::vector<string> folderNames;
     // iterate over all subFolders within faces folder
     for (int i = 0; i < subfolders.size(); i++) {
-        string personFolderName = subfolders[i];
-        // remove / or \\ from end of subFolder
-        std::size_t found = personFolderName.find_last_of("/\\");
-        string name = personFolderName.substr(found+1);
-        // assign integer label to person subFolder
-        int label = i;
-       
-        // add person name and label to vectors
-        //names.push_back(name);
-        //labels.push_back(label);
-        // add (integer label, person name) pair to map
-        //labelNameMap[label] = name;
-        
         // read imagePaths from each person subFolder
         // clear vectors
         folderNames.clear();
@@ -329,9 +369,6 @@ void readFolder(std::vector<string> &imagePaths,
         // filter only jpg files
         std::vector<string> extensions{"jpg","png"};
         filterFiles(subfolders[i], fileNames, imagePaths, extensions);
-        // add label i for all ajpg files found in subFolder
-        //for (int j = 0; j < imagePaths.size(); j++) {
-          //  imageLabels.push_back(i);
-        //}
+
     }
 }

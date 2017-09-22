@@ -211,8 +211,21 @@ bool isRootDir(string rootDir) {
         if (imagesDir.compare("images") == 0 && facesDir.compare("faces") == 0) {
             return true;
         }
-        return true;
     }
         return false;
+}
+
+bool isFacesDir(string rootDir) {
+    
+    if (is_dir(rootDir.c_str()) == true) {
+        //string imagesDir = rootDir.find_last_of("/");
+        std::size_t pos = rootDir.find_last_of("/");
+        string myFacesDir = rootDir.substr(pos+1);
+       // string facesPath = rootDir.substr(0, pos);
+        if (myFacesDir.compare("MyFaces") == 0 ) {
+            return true;
+        }
+    }
+    return false;
 }
 

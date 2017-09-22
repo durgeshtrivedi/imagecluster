@@ -40,8 +40,7 @@ void nearestNeighbor(dlib::matrix<float, 0, 1>& faceDescriptorQuery,
 void filterFiles(string dirPath, std::vector<string>& fileNames, std::vector<string>& filteredFilePaths, std::vector<string> extensions);
 void listdir(string dirName, std::vector<string>& folderNames, std::vector<string>& fileNames, std::vector<string>& symlinkNames);
 
+bool isFacesDir(string rootDir);
 bool isRootDir(string rootDir);
-bool is_dir(const char* path);
-bool is_file(const char* path);
 
 #endif // BIGVISION_faceBlendCommon_HPP_
