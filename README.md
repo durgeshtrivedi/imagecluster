@@ -1,6 +1,29 @@
 # README #
 
-Theis project can only be run using Xcode on MAC.It is having default setting considering OpencCV and Dlib is installed on the system with specific path else 
+If you try to run the project and you are faceing issue just look into  PROJECT SETUP section else follow RUN section  
+
+### RUN THE PROJECT ###
+If you just want to run it after setup the ### version_0.2 ### has 2 features and which can be run from command line only right now.
+So make sure which version tag you are using to execute it.
+
+Once run it will show options on command line
+
+    You have mutiple options to chose from.
+       1. You want to Segregate all your images based on faces.
+    
+       2. If you want to segregate only images with particular person init from a group of images.
+         then you need to provide 1 or 2 images of that person in a folder with the name you would like 
+         to have so that system can learn which images only you want, you can also keep mutiple folder
+         with different person in it to get all the images of those person only in those folder.
+       3. 0 to exit the app.
+
+Based on the option you chose you get more option.
+
+It is more important you keep the folder path for images as mentioned in options else app will not behave as intended, its a limitation.
+The drag and drop for folder path is not working, its again a limitation for current version, so you need to type it or copy paste it.
+
+### PROJECT SETUP 
+This project can only be run using Xcode on MAC.It is having default setting considering OpencCV and Dlib is installed on the system with specific path else 
 you need to edit the Opencv and dlib Header/ library path in build setting for the project. Which you definately need it to run the project .
 
 ### OpenCV  and Dlib header search path in project setting ###
