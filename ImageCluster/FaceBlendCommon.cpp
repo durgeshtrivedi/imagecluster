@@ -157,11 +157,12 @@ void listdir(string dirName, std::vector<string>& folderNames, std::vector<strin
     if ((dir = opendir(dirName.c_str())) != NULL) {
         /* print all the files and directories within directory */
         while ((ent = readdir(dir)) != NULL) {
-            // ignore . and ..
-            if(strcmp(ent->d_name,".") == 0 || strcmp(ent->d_name,"..") == 0 ) {
+            // ignore . and .. and file name start with .
+            string temp_name = ent->d_name;
+            if(strcmp(ent->d_name,".") == 0 || strcmp(ent->d_name,"..") == 0 || (temp_name.find_first_of(".") == 0) ) {
                 continue;
             }
-            string temp_name = ent->d_name;
+            
             // Read more about file types identified by dirent.h here
             // https://www.gnu.org/software/libc/manual/html_node/Directory-Entries.html
             switch (ent->d_type) {
@@ -198,34 +199,3 @@ bool is_dir(const char* path) {
     stat(path, &buf);
     return S_ISDIR(buf.st_mode);
 }
-bool isRootDir(string rootDir) {
-    
-    if (is_dir(rootDir.c_str()) == true) {
-        //string imagesDir = rootDir.find_last_of("/");
-        std::size_t pos = rootDir.find_last_of("/");
-        string imagesDir = rootDir.substr(pos+1);
-        string facesPath = rootDir.substr(0, pos);
-        // Keep the root dir path to faces
-        rootDirPath = facesPath;
-        string facesDir = facesPath.substr(facesPath.find_last_of("/")+1);
-        if (imagesDir.compare("images") == 0 && facesDir.compare("faces") == 0) {
-            return true;
-        }
-    }
-        return false;
-}
-
-bool isFacesDir(string rootDir) {
-    
-    if (is_dir(rootDir.c_str()) == true) {
-        //string imagesDir = rootDir.find_last_of("/");
-        std::size_t pos = rootDir.find_last_of("/");
-        string myFacesDir = rootDir.substr(pos+1);
-       // string facesPath = rootDir.substr(0, pos);
-        if (myFacesDir.compare("MyFaces") == 0 ) {
-            return true;
-        }
-    }
-    return false;
-}
-

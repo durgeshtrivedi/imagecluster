@@ -58,6 +58,7 @@ void imageCluster ();
 void userFolderDir();
 bool readRootDir();
 
+void configDirPath(OPTIONS options);
 void allImageDirector(OPTIONS option);
 void clusterFaces(OPTIONS options);
 void clusterAllFaces(string label,
@@ -75,8 +76,8 @@ string faceMatch(string descriptorDir, matrix<float,0,1> &faceDescriptorQuery, s
 
 void writeDescriptors(std::vector<string> &faceLabels, std::vector<matrix<float,0,1>> &faceDescriptors);
 
-void readFolder(std::vector<string> &imagePaths,
-                std::vector<string> &imageLabels);
+void readFolder(string dirPath, std::vector<string> &imagePaths);
+void readSubFolders(std::vector<string>& subfolders, std::vector<string>& imagePaths);
 void moveSelectedFaces(string label, string imagePath);
 void saveFile(string label, string imagePath);
 void saveDescriptor(string imagePath,

@@ -57,8 +57,6 @@
 #define STRTOUCFIRST(x) std::transform (x.begin(), x.begin()+1, x.begin(),  ::toupper); std::transform (x.begin()+1, x.end(),   x.begin()+1,::tolower)
 
 
-#define ENUM_TO_STR(ENUM) std::string(#ENUM)
-
 using namespace cv;
 using namespace std;
 using std::cout;
@@ -68,11 +66,6 @@ using std::string;
 #define  CREATE_DESCRIPTOR  "DESCRIPTOR"
 #define  NEW_FACE "NEWFACE"
 
-enum FACES
-{
-    UNKNOWN,
-    NEWFACE
-};
 enum OPTIONS
 {
     OPTION_1_CLUSTER_ALL_FACES          = 100,
