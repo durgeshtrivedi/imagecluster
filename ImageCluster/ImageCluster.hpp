@@ -66,7 +66,7 @@ void clusterAllFaces(string label,
                      matrix<float,0,1> &faceDescriptorQuery,
                      std::vector<matrix<float,0,1>> &faceDescriptors,
                      std::vector<string> &faceLabels,
-                     char  &alphabet);
+                     unsigned long  &alphabet);
 void clusterUserFaces(string label,
                       string imagePath,
                       matrix<float,0,1> &faceDescriptorQuery,
@@ -84,10 +84,11 @@ void saveDescriptor(string imagePath,
                              matrix<float,0,1> &faceDescriptorQuery,
                              std::vector<matrix<float,0,1>> &faceDescriptors,
                              std::vector<string> &faceLabels,
-                              string  &alphabet);
+                              string  alphabet);
 void separateImage(frontal_face_detector faceDetector,
                    shape_predictor landmarkDetector,
                    anet_type net,
                    std::vector<string> imagePaths,
                    std::vector<int> imageLabels);
+string getFolderName(unsigned long val);
 #endif /* ImageCluster_hpp */

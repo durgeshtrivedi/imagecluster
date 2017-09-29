@@ -132,7 +132,7 @@ void clusterFaces(OPTIONS options) {
     configDirPath(options);
     readFolder(rootDirPath, imagePaths);
     
-    char alphabet = 'A';
+    unsigned long count = 0;
     // iterate over images
     for (int i = 0; i < imagePaths.size(); i++) {
         string imagePath = imagePaths[i];
@@ -181,7 +181,7 @@ void clusterFaces(OPTIONS options) {
             
             switch (options) {
                 case OPTION_1_CLUSTER_ALL_FACES:
-                    clusterAllFaces(label, imagePath,faceDescriptorQuery,faceDescriptors,faceLabels,alphabet);
+                    clusterAllFaces(label, imagePath,faceDescriptorQuery,faceDescriptors,faceLabels,count);
                     break;
                 case OPTION_2_READ_FIRST_FOLDERS:
                     clusterUserFaces(label, imagePath,faceDescriptorQuery,faceDescriptors,faceLabels);
@@ -216,26 +216,44 @@ void clusterAllFaces(string label,
                      matrix<float,0,1> &faceDescriptorQuery,
                      std::vector<matrix<float,0,1>> &faceDescriptors,
                      std::vector<string> &faceLabels,
-                     char  &alphabet)
+                     unsigned long  &count)
 {
     resultDirPath = rootDirPath;
     if (label == CREATE_DESCRIPTOR) {
         // If there is no descriptor file save model for first time
-        string alpha(1, alphabet);
-        saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, alpha);
+        saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, getFolderName(count));
     }
     // update model with new Face Match
     else if  (label == NEW_FACE) {
         // Change the folder name before saving it as new face match
-        alphabet++;
-        string alpha(1, alphabet);
-        saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, alpha);
+        count++;
+        saveDescriptor(imagePath, faceDescriptorQuery, faceDescriptors, faceLabels, getFolderName(count));
     }
     else {
         saveFile(label, imagePath);
     }
 }
 
+string getFolderName(unsigned long val)
+{
+   // http://boards.straightdope.com/sdmb/showthread.php?t=226624
+    static const char digits[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    std::vector<char> buf;
+    buf.push_back(digits[val % 26]);
+    val /= 26;
+    if (val) {
+        do {
+            --val;
+            buf.push_back(digits[val % 26]);
+            val /= 26;
+        }
+        while (val);
+    }
+    // by iterating through the buffer in reverse order, the // resulting string will be in the correct order.
+    string s;
+    copy(buf.rbegin(), buf.rend(), std::back_inserter(s));
+    return s;
+}
 
 void clusterUserFaces(string label,
                       string imagePath,
@@ -286,7 +304,7 @@ void saveDescriptor(string imagePath,
                     matrix<float,0,1> &faceDescriptorQuery,
                     std::vector<matrix<float,0,1>> &faceDescriptors,
                     std::vector<string> &faceLabels,
-                    string  &alphabet) {
+                    string  alphabet) {
     saveFile(alphabet, imagePath);
     
     faceLabels.clear();
