@@ -147,10 +147,21 @@ void clusterFaces(OPTIONS options) {
         // read image using OpenCV
         Mat im = cv::imread(imagePath, cv::IMREAD_COLOR);
         
+        int height = im.rows;
+        float IMAGE_RESIZE = (float)height/RESIZE_HEIGHT;
+        
+        // resize the original image to smaller size, the bigger image take lot more time to process in facedetetor
+        cv::resize(im, im, Size(), 1.0/IMAGE_RESIZE, 1.0/IMAGE_RESIZE);
+        cv::Size size = im.size();
+        cv::Mat frame_small;
+        
+        // Downsample the image and resize it
+        cv::resize(im, frame_small, size, 1.0/FACE_DOWNSAMPLE_RATIO_DLIB, 1.0/FACE_DOWNSAMPLE_RATIO_DLIB);
+    
         // convert image from BGR to RGB
         // because Dlib used RGB format
         Mat imRGB;
-        cv::cvtColor(im, imRGB, cv::COLOR_BGR2RGB);
+        cv::cvtColor(frame_small, imRGB, cv::COLOR_BGR2RGB);
         
         // convert OpenCV image to Dlib's cv_image object, then to Dlib's matrix object
         // Dlib's dnn module doesn't accept Dlib's cv_image template

@@ -66,6 +66,10 @@ using std::string;
 #define  CREATE_DESCRIPTOR  "DESCRIPTOR"
 #define  NEW_FACE "NEWFACE"
 
+  //To increase the speed of faceDetector we need to resize the iamge, so With 576 size the result is good for images with single face and also for images with 4 5 face up to some extent with size 300 for single face the speed increase 3X but produce bad result for 2 3 faces
+#define RESIZE_HEIGHT 576
+#define FACE_DOWNSAMPLE_RATIO_DLIB 4
+
 enum OPTIONS
 {
     OPTION_1_CLUSTER_ALL_FACES          = 100,
