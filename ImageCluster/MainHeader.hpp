@@ -80,9 +80,18 @@ enum OPTIONS
 
 // Code specific to read Current Dir
 string GetExecutableDirectory(const char* argv0);
+
 bool ChangeDirectory(const char* dir);
+
+/**
+ Function to Get the current working DIR on a system
+ */
 string GetCurrentWorkingDirectory();
 
+/**
+ Function to check the file exist at give path
+ param string : file path
+ */
 inline bool fileExist (const std::string& name) {
     if (FILE *file = fopen(name.c_str(), "r")) {
         fclose(file);
@@ -94,8 +103,24 @@ inline bool fileExist (const std::string& name) {
 
 void imageCluster ();
 
+/**
+ It will check if the given path is a dir or not
+ param const char* : path DIR path
+ */
 bool is_dir(const char* path);
+
+/**
+ It will check if the given path is a file or not
+ param const char* : path file path
+ */
 bool is_file(const char* path);
+
+/**
+ Copy function to copy a file from source to destination location
+ param string : SRC file path
+ param string : DEST file path
+ param string : filename
+ */
 void copyFile(string SRC, string DEST, string filename);
 //
 #endif /* MainHeader_h */

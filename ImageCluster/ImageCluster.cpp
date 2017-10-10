@@ -13,6 +13,7 @@ string resultDirPath = "";
 string facesDirPath = "";
 string testDataDir = "";
 
+// The main fuction to start the app which will show you the option to select from to start
 void imageCluster () {
     int index;
     cout << "You have mutiple options to chose from." << endl << endl;
@@ -92,6 +93,7 @@ bool userDir() {
     return is_dir(facesDirPath.c_str());
 }
 
+// Function to check if user selected the correct dir or not
 void userFolderDir() {
     if (readRootDir() == true) {
         if (userDir() == true) {
@@ -113,7 +115,7 @@ void printVector(std::vector<T>& vec) {
     cout << endl;
 }
 
-
+// The main fuction which start clustering the images based on the user input
 void clusterFaces(OPTIONS options) {
     cout << "It will take some time to read the  model keep patience " << endl;
     // Initialize face detector, facial landmarks detector and face recognizer
@@ -129,7 +131,9 @@ void clusterFaces(OPTIONS options) {
     deserialize(faceRecognitionModelPath) >> net;
     std::vector<string> imagePaths;
     
+    // configuring the user DIR to read the image with different options which can change
     configDirPath(options);
+    // read the image folder
     readFolder(rootDirPath, imagePaths);
     
     unsigned long count = 0;
@@ -245,6 +249,7 @@ void clusterAllFaces(string label,
     }
 }
 
+// It will return the folder name when the option 1 is choosen
 string getFolderName(unsigned long val)
 {
    // http://boards.straightdope.com/sdmb/showthread.php?t=226624
@@ -311,6 +316,8 @@ void saveFile(string label, string imagePath) {
     string destDir = resultDirPath +  resultPath + label;
     copyFile(sorceDir, destDir, value);
 }
+
+// Save the descriptor file on the disk
 void saveDescriptor(string imagePath,
                     matrix<float,0,1> &faceDescriptorQuery,
                     std::vector<matrix<float,0,1>> &faceDescriptors,
@@ -330,6 +337,7 @@ void saveDescriptor(string imagePath,
     // save the label and descriptor to the file
     writeDescriptors(faceLabels,faceDescriptors);
 }
+// Write function to save the descriptor file on the disk
 void writeDescriptors(std::vector<string> &faceLabels, std::vector<matrix<float,0,1>> &faceDescriptors) {
     cout << "number of face descriptors " << faceDescriptors.size() << endl;
     cout << "number of face labels " << faceLabels.size() << endl;
@@ -362,6 +370,7 @@ void writeDescriptors(std::vector<string> &faceLabels, std::vector<matrix<float,
     
 }
 
+// Match the face descriptor from descriptor save on the disk
 string faceMatch(string descriptorDir, matrix<float,0,1> &faceDescriptorQuery, std::vector<string> &faceLabels) {
     
     //string currentDir = rootDirPath;
@@ -378,10 +387,10 @@ string faceMatch(string descriptorDir, matrix<float,0,1> &faceDescriptorQuery, s
     
     // Find closest face enrolled to face found in frame
     string label;
-    float minDistance;
-    nearestNeighbor(faceDescriptorQuery, faceDescriptors, faceLabels, label, minDistance);
+    nearestNeighbor(faceDescriptorQuery, faceDescriptors, faceLabels, label);
     return label;
 }
+
 void readFolder(string dirPath, std::vector<string> &imagePaths) {
     
     // Now let's prepare our training data

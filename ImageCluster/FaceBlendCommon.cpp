@@ -31,31 +31,6 @@ Mat getCroppedFaceRegion(Mat image, std::vector<Point2f> landmarks, cv::Rect &se
     return cropped;
 }
 
-void readLabelNameMap(const string& filename, std::vector<string>& names, std::vector<int>& labels, std::map<int, string>& labelNameMap, char separator)
-{
-    std::ifstream file(filename.c_str(), ifstream::in);
-    if (!file)
-    {
-        string error_message = "No valid input file was given, please check the given filename.";
-        CV_Error(CV_StsBadArg, error_message);
-    }
-    string line;
-    string name, classlabel;
-    while (getline(file, line))
-    {
-        // cout << line << endl;
-        stringstream liness(line);
-        getline(liness, name, separator);
-        getline(liness, classlabel);
-        // cout << name << " " << classlabel << endl;
-        if(!name.empty() && !classlabel.empty()) {
-            names.push_back(name);
-            int label = atoi(classlabel.c_str());
-            labels.push_back(label);
-            labelNameMap[label] = name;
-        }
-    }
-}
 
 // read descriptors saved on disk
 void readDescriptors(const string& filename, std::vector<string>& faceLabels, std::vector<matrix<float,0,1>>& faceDescriptors, char separator) {
@@ -72,7 +47,7 @@ void readDescriptors(const string& filename, std::vector<string>& faceLabels, st
     // valueStr = one element of descriptor in string format
     // value = one element of descriptor in float
     string valueStr;
-    float value;
+    
     std::vector<float> faceDescriptorVec;
     // read lines from file one by one
     while (getline(file, line)) {
@@ -103,9 +78,9 @@ void readDescriptors(const string& filename, std::vector<string>& faceLabels, st
 // to a query face descriptor
 void nearestNeighbor(dlib::matrix<float, 0, 1>& faceDescriptorQuery,
                      std::vector<dlib::matrix<float, 0, 1>>& faceDescriptors,
-                     std::vector<string>& faceLabels, string &label, float& minDistance) {
+                     std::vector<string>& faceLabels, string &label) {
     int minDistIndex = 0;
-    minDistance = 1.0;
+    float minDistance = 1.0;
     label = NEW_FACE;
     // Calculate Euclidean distances between face descriptor calculated on face dectected
     // in current frame with all the face descriptors we calculated while enrolling faces
