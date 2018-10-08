@@ -2,13 +2,19 @@
 
 ### About Project ###
 
-This project is created based on the learning I got form the course http://www.learnopencv.com/ it is using Opencv and dlib based deeplearning for images cluster 
+This project is created based on the learning I got form the course http://www.learnopencv.com/ it is using Opencv and dlib based deeplearning for Face cluster.
+
+https://www.learnopencv.com/best-project-award-computer-vision-for-faces/ 
+
+
 It is part of the final project for the course.
  
      What it do.
  
     By using dlib deeplearing it will learn the peroson face present in a image and cluster out all the images from a group of images where that person face is present.
     So actually it is seperating out images from group of images based of the person face it have.
+    
+    ![alt text](https://www.learnopencv.com/wp-content/uploads/2017/11/durgesh-project-768x432.jpg)
  
 
 If you try to run the project and you are faceing issue just look into  PROJECT SETUP section else follow RUN section  
