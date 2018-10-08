@@ -115,3 +115,5 @@ Rest of the setting are already part of the project and they should work all the
 
 I have added the ziped dlib-19.4 file in extra folder in project dir you can unzip and use the path in headers for dlib.Thats should work I have not tried this way 
 because I build dlib from source, so I think this way will work. But you must install OpenCV to run the project .
+
+There is a Makefile available in the `ImageCluster` folder which compiles the program, tested on Ubuntu 18.04 and Macos Mojave (install xquartz).
